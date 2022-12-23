@@ -47,4 +47,7 @@ router.post('/logout', (req, res) => {
   }
 });
 
+// Router for Registration
+// use same
+
 module.exports = router;
