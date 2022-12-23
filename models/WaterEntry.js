@@ -15,7 +15,7 @@ WaterEntry.init(
       type: DataTypes.DOUBLE
     },
     date: {
-      type: DataTypes.timestamps
+      type: DataTypes.DATE
     },
     userId: {
       type: DataTypes.INTEGER
