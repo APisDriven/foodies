@@ -9,3 +9,4 @@ router.use('/foodEntries', foodEntriesRoutes);
 router.use('/waterEntries', waterEntriesRoutes);
 
 module.exports = router;
+
