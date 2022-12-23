@@ -18,7 +18,7 @@ FoodEntry.init(
       type: DataTypes.INTEGER
     },
     date: {
-      type: DataTypes.timestamps
+      type: DataTypes.DATE
     },
     userId: {
       type: DataTypes.INTEGER
