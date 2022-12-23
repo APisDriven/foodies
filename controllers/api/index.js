@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const userRoutes = require('./user_routes');
+const userRoutes = require('./userRoutes');
 const foodEntriesRoutes = require('./food_entries_routes');
 const waterEntriesRoutes = require('./water_entries_routes');
 
