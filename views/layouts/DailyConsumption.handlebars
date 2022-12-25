@@ -4,10 +4,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Registry</title>
+  <title>Daily Consumption</title>
   <link rel="stylesheet" href="/css/jass.css">
 </head>
+
 <body>
-  <h1>second page</h1>
+  <h1>Daily Consumption</h1>
+  <h3>{{format_date}}</h3>
+  <main>
+    <div id="meals">
+      <h2>Meals</h2>
+        <div id="food-item-form">
+          <form>
+            <input type="text" placeholder="Enter meal"/><br>
+            <input type="text" placeholder="Enter calories"/>
+            <button class="btn" id="save">Save</button>
+          </form>
+        </div>
+
+        <div id="populated-food" class="table">
+          <!--Note to team from Harper: still figuring out if using the table class OR use more divs and making them columns in the css would be better-->
+          <ul>
+            {{#each foodEntryData}}
+            <li id="populated-item">{{name}}</li>
+            <li id="item-calories">{{calories}}</li>
+            {{/each}}
+          </ul>
+        </div>
+    </div>
+
+    <div id="water-form">
+      <h2>Water Intake</h2>
+        <form>
+            <input type="text" placeholder="Enter water"/><br>
+            <input type="text" placeholder="Enter cups"/>
+            <button class="btn" id="save">Save</button>
+        </form>
+    </div>
+
+    <div id="populated-water" class="table">
+      <ul>
+        {{#each waterEntryData}}
+        <li id="water-item">Water</li>
+        <li id="water-cups">{{ounces}}</li>
+      </ul>
+    </div>
+  </main>
+  <a href="#"><button class="btn" id="visit-dashboard">Visit Dashboard</button></a>
 </body>
 </html>
