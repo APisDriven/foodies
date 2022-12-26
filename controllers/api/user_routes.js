@@ -1,5 +1,9 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
 
 router.post('/login', async (req, res) => {
   try {
@@ -14,7 +18,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Verify the posted password with the password store in the database
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await bcrypt.checkPassword(req.body.password);
 
     if (!validPassword) {
       res
@@ -37,17 +41,26 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    // Remove the session variables
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
+    req.session.destroy();
+    res.redirect('/');
+})
+
 
 // Router for Registration
-// use same
+router.post('/register', async(req, res, next)=>{
+  //res.status(201).json(req.body);
+  //add new user and return 201
+  const salt = await bcrypt.genSalt(10)
+  var usr = {
+    first_name : req.body.firstName,
+    last_name : req.body.lastName,
+    email : req.body.email,
+    password : await bcrypt.hash(req.body.password, salt)
+  };
+  created_user = await User.create(usr);
+  res.status(201).json(created_user);
+});
+
+
 
 module.exports = router;
