@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { FoodEntry, User } = require('../../models');
+const { WaterEntry, User } = require('../../models');
 
 // The `/api/foodEntries` endpoint
 
 // get all water entries for userId
 router.get('/:userId', (req, res) => {
-  // find all food entries
+  // find all water entries
   const userId = req.params.userId
-  FoodEntry.findAll({
+  WaterEntry.findAll({
     where: { userId: userId }
 })
 		.then(data => res.json(data))
@@ -17,11 +17,11 @@ router.get('/:userId', (req, res) => {
 });
 
 // get one food entry
-router.get('/:foodEntryId', (req, res) => {
+router.get('/:waterEntryId', (req, res) => {
   // find a single foodEntry by its `id`
-  const foodEntryId = req.params.foodEntryId
-  FoodEntry.findOne({
-		where: { id: foodEntryId }
+  const waterEntryId = req.params.waterEntryId
+  WaterEntry.findOne({
+		where: { id: waterEntryId }
 	})
 		.then(data => res.json(data))
 		.catch(err => {
@@ -29,7 +29,7 @@ router.get('/:foodEntryId', (req, res) => {
 		});
 });
 
-// create new food entry
+// create new water entry
 router.post('/', (req, res) => {
   /* req.body should look like this...
     {
@@ -40,13 +40,68 @@ router.post('/', (req, res) => {
     }
   */
 
-    FoodEntry.create(req.body).then(data => res.json(data)).catch(err => {
+    WaterEntry.create(req.body).then(data => res.json(data)).catch(err => {
       res.status(401).json(err)
     })
 
 });
 
-// update food entry
+// get all water entries for userId for date range
+router.post('/waterEntries_by_date', (req, res) => {
+  // find all water entries
+
+    /* req.body should look like this...
+    {
+      from: startDate,
+      to: endDate,
+      userId: userId
+    }
+  */
+
+  const userId = req.body.userId
+  const fromDate = req.body.from
+  const toDate =  req.body.to
+  FoodEntry.findAll({
+    where: { 
+      userId: userId,
+      date: {
+        $between: [
+          fromDate,
+          toDate
+        ]
+      }
+     }
+})
+		.then(data => res.json(data))
+		.catch(err => {
+			res.status(401).json(err);
+		});
+});
+
+
+// get all water entries for userId for past 7 days
+router.get('/waterEntries_last_week', (req, res) => {
+
+  const date = new Date();
+  date.setDate(date.getDate() - 7)
+ 
+  const userId = req.body.userId
+
+  WaterEntry.findAll({
+    where: { 
+      userId: userId,
+      date: {
+        $gt: date.toISOString
+      }
+     }
+})
+		.then(data => res.json(data))
+		.catch(err => {
+			res.status(401).json(err);
+		});
+});
+
+// update water entry
 router.put('/:id', (req, res) => {
   // update food entry data
   const updateId = req.params.id
@@ -62,9 +117,9 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  // delete one food entry by its `id` value
+  // delete one water entry by its `id` value
   const deleteId = req.params.id
-  FoodEntry.destroy({
+  WaterEntry.destroy({
 		where: { id: deleteId }
 	}).then(data => {
 		if (!data) {
