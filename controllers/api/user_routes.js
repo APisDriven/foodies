@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
-
+//http://localhost:3001/api/users/login
 router.post('/login', async (req, res) => {
   try {
     // Find the user who matches the posted e-mail address
@@ -40,24 +40,25 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//http://localhost:3001/api/users/logout
 router.post('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
 })
 
 
-// Router for Registration
+//http://localhost:3001/api/users/register
 router.post('/register', async(req, res, next)=>{
   //res.status(201).json(req.body);
   //add new user and return 201
   const salt = await bcrypt.genSalt(10)
-  var usr = {
-    first_name : req.body.firstName,
-    last_name : req.body.lastName,
+  var user = {
+    name : req.body.name,
+    // last_name : req.body.lastName,
     email : req.body.email,
     password : await bcrypt.hash(req.body.password, salt)
   };
-  created_user = await User.create(usr);
+  created_user = await User.create(user);
   res.status(201).json(created_user);
 });
 
