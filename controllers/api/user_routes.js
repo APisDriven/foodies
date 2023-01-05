@@ -1,18 +1,11 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 const bcrypt = require("bcrypt");
-<<<<<<< HEAD
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-
-router.post("/login", async (req, res) => {
-=======
 // const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
 //http://localhost:3001/api/users/login
 router.post('/login', async (req, res) => {
->>>>>>> f8a3eb1f89bbfd52a492ee88cf6ce6f54b8490e9
   try {
     console.log("hit the /api/user/login route");
     // Find the user who matches the posted e-mail address
@@ -49,7 +42,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
+
 router.post("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
@@ -65,7 +58,9 @@ router.post("/register", async (req, res, next) => {
     last_name: req.body.lastName,
     email: req.body.email,
     password: await bcrypt.hash(req.body.password, salt),
-=======
+  }
+})
+
 //http://localhost:3001/api/users/logout
 router.post('/logout', (req, res) => {
     req.session.destroy();
@@ -83,7 +78,6 @@ router.post('/register', async(req, res, next)=>{
     // last_name : req.body.lastName,
     email : req.body.email,
     password : await bcrypt.hash(req.body.password, salt)
->>>>>>> f8a3eb1f89bbfd52a492ee88cf6ce6f54b8490e9
   };
   created_user = await User.create(user);
   res.status(201).json(created_user);
