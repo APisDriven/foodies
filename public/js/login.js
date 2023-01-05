@@ -15,7 +15,7 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace('/dashboard');
     } else {
       alert('Failed to log in');
     }
@@ -45,7 +45,7 @@ if (signupEmail.value && signupName.value && signupPw.value) {
 
   if (response.ok) {
     
-    document.location.replace('/');
+    document.location.replace('/dashboard');
   } else {
     alert('Failed to log in');
   }
