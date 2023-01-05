@@ -9,8 +9,8 @@ const fetchAsync = async()=>{
 fetchAsync().then(keyValues=>{
     console.log(keyValues)
     const time_labels = Object.values(keyValues.slice(1).map(element => element[0])),
-    calories = Object.values(keyValues[0]),
-    calories_datasets = [],
+    ounces = Object.values(keyValues[0]),
+    ounces_datasets = [],
 
     bg = [
         'rgba(27, 158, 119, 0.5)',
@@ -33,7 +33,7 @@ fetchAsync().then(keyValues=>{
         'rgb(102, 102, 102)'
     ]
 for (let i = 1; i < calories.length + 1; i++) {
-    calories_datasets.push({
+    ounces_datasets.push({
         label: calories[i - 1],
         data: Object.values(keyValues.slice(1, 7).map(element => element[i])),
         backgroundColor: bg[i - 1],
@@ -52,7 +52,7 @@ for (let i = 1; i < calories.length + 1; i++) {
     const myNewChart = new Chart(document.getElementById('myChart'), {
         type: 'line',
         data: {
-            datasets: calories_datasets,
+            datasets: ounces_datasets,
             labels: time_labels
         },
         options: {
@@ -66,14 +66,14 @@ for (let i = 1; i < calories.length + 1; i++) {
                 y: {
                     title: {
                         display: true,
-                        text: 'Calories Intake'
+                        text: 'Water Intake'
                     }
                 }
             },
             plugins: {
                 title: {
                     display: true,
-                    text: "Calories",
+                    text: "Water",
                     font: {
                         size: 16
                     }
@@ -84,4 +84,5 @@ for (let i = 1; i < calories.length + 1; i++) {
             }
         }
     })
-})
+});
+ 

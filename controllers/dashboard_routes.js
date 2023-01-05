@@ -32,3 +32,4 @@ router.get('/', withAuth, async(req, res)=>{
         res.redirect('login')
     }
 })
+module.exports = router;
