@@ -7,6 +7,7 @@ const helpers = require('./utils/helpers');
 const app = express();
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const chart = require('chart.js');
 
 const hbs = handlebars.create({ helpers });
 
@@ -44,9 +45,6 @@ app.use(session(sess));
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
 });
-
-
-
 
 app.post('/user',(req,res) => {
   if(req.body.username == myusername && req.body.password == mypassword){
