@@ -13,6 +13,12 @@
   <h3>{{format_date}}</h3>
   <main>
     <div id="meals">
+
+      <!-- Canvas is where FOOD chart will be inserted -->
+<div>
+    <canvas style="height: 350px; margin: 50px;" id="foodChart"></canvas>
+</div>
+
       <h2>Meals</h2>
         <div id="food-item-form">
           <form>
@@ -25,7 +31,7 @@
         <div id="populated-food" class="table">
           <!--Note to team from Harper: still figuring out if using the table class OR use more divs and making them columns in the css would be better-->
           <ul>
-            {{#each foodEntryData}}
+            {{#each foodEntries}}
             <li id="populated-item">{{name}}</li>
             <li id="item-calories">{{calories}}</li>
             {{/each}}
@@ -44,13 +50,16 @@
 
     <div id="populated-water" class="table">
       <ul>
-        {{#each waterEntryData}}
+        {{#each waterEntries}}
         <li id="water-item">Water</li>
         <li id="water-cups">{{ounces}}</li>
       </ul>
     </div>
   </main>
   <a href="#"><button class="btn" id="visit-dashboard">Visit Dashboard</button></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="chart.js"></script>
   <footer>
     <button>Logout</button>
   </footer>
