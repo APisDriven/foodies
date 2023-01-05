@@ -15,12 +15,49 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace('/dashboard');
     } else {
       alert('Failed to log in');
     }
   }
 };
+
+// Register Selectors
+let signupName = document.getElementById("name-signup")
+let signupEmail = document.getElementById("email-signup")
+let signupPw = document.getElementById("password-signup")
+
+
+// add registration inputs to DB and send user to dashboard page
+let registerBtn = document.getElementById("register-button")
+
+registerBtn.addEventListener("click", async function(event) {
+// check on this code:
+event.preventDefault();
+
+if (signupEmail.value && signupName.value && signupPw.value) {
+  // Send the e-mail and password to the server
+  const response = await fetch('/api/users/register', {
+    method: 'POST',
+    body: JSON.stringify({ name: signupName.value, email: signupEmail.value, password: signupPw.value }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    
+    document.location.replace('/dashboard');
+  } else {
+    alert('Failed to log in');
+  }
+}
+})
+
+// Verify user info and send to dashboard page
+let login = document.getElementById("submit-button")
+
+login.addEventListener("click", function() {
+
+})
 
 document
   .querySelector('.login-form')
