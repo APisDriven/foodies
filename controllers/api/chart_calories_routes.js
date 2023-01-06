@@ -2,8 +2,10 @@
 
 const CaloryChart = require('../../public/js/chart');
 
+const withAuth = require('../../utils/auth');
+
 //Create a chart
-router.post('/', (req, res)=> {
+router.get('/', withAuth, (req, res)=> {
 
     //access the database to get chart data
     //res.json(chartData);

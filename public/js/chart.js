@@ -1,10 +1,22 @@
 // const foodChart = document.getElementById('foodChart');
-
+const dummyData = [{
+    x: '2021-11-06 ',
+    y: 50
+}, {
+    x: '2021-11-07 ',
+    y: 60
+}, {
+    x: '2021-11-08 ',
+    y: 20
+}]
+//API call
 const fetchAsync = async()=>{
-   
+  return dummyData; 
 }
 
-fetchAsync().then(keyValues=>{
+
+
+fetchAsync().then(data=>{
     // console.log(keyValues)
     // const time_labels = Object.values(keyValues.slice(1).map(element => element[0])),
     // calories = Object.values(keyValues[0]),
@@ -47,20 +59,26 @@ fetchAsync().then(keyValues=>{
 
 //   const myChart = new Chart(
 //     document.getElementById('myChart'),
+
     const myNewChart = new Chart(document.getElementById('foodChart'), {
         type: 'line',
         // data: {
         //     datasets: calories_datasets,
         //     labels: time_labels
         // },
+        // data: {
+        //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        //     datasets: [{
+        //       label: '# of Votes',
+        //       data: [12, 19, 3, 5, 2, 3],
+        //       borderWidth: 1
+        //     }]
+        //   },
+
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1
-            }]
+            datasets: [{ data: data }]
           },
+
         options: {
             scales: {
                 x: {
