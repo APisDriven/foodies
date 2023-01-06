@@ -1,6 +1,6 @@
 
 
-const CaloryChart = requare('../../public/chart');
+const CaloryChart = require('../../public/js/chart');
 
 //Create a chart
 router.post('/', (req, res)=> {

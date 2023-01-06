@@ -6,3 +6,4 @@ registerBtn.addEventListener("click", function(event) {
 document.location.replace('/dashboard');
 
 event.preventDefault()});
+
