@@ -22,8 +22,8 @@ router.get('/', withAuth, async(req, res)=>{
         const waterEntries = waterData.map((waterEntry)=>waterEntry.get({
             plain:true
         }))
-        res.render('DailyConsumption', {
-            layout:'main',
+        res.render('dashboard', {
+            // layout:'main',
             foodEntries,
             waterEntries
         })

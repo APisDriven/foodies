@@ -1,16 +1,14 @@
 // const foodChart = document.getElementById('foodChart');
 
 const fetchAsync = async()=>{
-    const response = await fetch("user_data.json"),
-        keyValues = await response.json()
-    return keyValues
+   
 }
 
 fetchAsync().then(keyValues=>{
-    console.log(keyValues)
-    const time_labels = Object.values(keyValues.slice(1).map(element => element[0])),
-    calories = Object.values(keyValues[0]),
-    calories_datasets = [],
+    // console.log(keyValues)
+    // const time_labels = Object.values(keyValues.slice(1).map(element => element[0])),
+    // calories = Object.values(keyValues[0]),
+    // calories_datasets = [],
 
     bg = [
         'rgba(27, 158, 119, 0.5)',
@@ -32,14 +30,14 @@ fetchAsync().then(keyValues=>{
         'rgb(166, 118, 29)',
         'rgb(102, 102, 102)'
     ]
-for (let i = 1; i < calories.length + 1; i++) {
-    calories_datasets.push({
-        label: calories[i - 1],
-        data: Object.values(keyValues.slice(1, 7).map(element => element[i])),
-        backgroundColor: bg[i - 1],
-        borderColor: bc[i - 1]
-    })
-} 
+// for (let i = 1; i < calories.length + 1; i++) {
+//     calories_datasets.push({
+//         label: calories[i - 1],
+//         data: Object.values(keyValues.slice(1, 7).map(element => element[i])),
+//         backgroundColor: bg[i - 1],
+//         borderColor: bc[i - 1]
+//     })
+// } 
 
 //   const config = {
 //     type: 'line',
@@ -49,12 +47,20 @@ for (let i = 1; i < calories.length + 1; i++) {
 
 //   const myChart = new Chart(
 //     document.getElementById('myChart'),
-    const myNewChart = new Chart(document.getElementById('myChart'), {
+    const myNewChart = new Chart(document.getElementById('foodChart'), {
         type: 'line',
+        // data: {
+        //     datasets: calories_datasets,
+        //     labels: time_labels
+        // },
         data: {
-            datasets: calories_datasets,
-            labels: time_labels
-        },
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              borderWidth: 1
+            }]
+          },
         options: {
             scales: {
                 x: {
