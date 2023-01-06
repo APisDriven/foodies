@@ -7,7 +7,7 @@ const helpers = require('./utils/helpers');
 const app = express();
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const chart = require('chart.js');
+
 
 const hbs = handlebars.create({ helpers });
 
@@ -57,5 +57,4 @@ app.post('/user',(req,res) => {
       res.send('Invalid username or password');
   }
 })
-
 

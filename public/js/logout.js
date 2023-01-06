@@ -1,3 +1,13 @@
+let logoutBtn = document.getElementById("logout-btn");
+
+logoutBtn.addEventListener("click", function(event) {
+    console.log("logout btn clicked")
+// check on this code:
+document.location.replace('/login');
+
+event.preventDefault()});
+
+
 const logout = async () => {
   // Make a POST request to destroy the session on the back end
   const response = await fetch('/api/users/logout', {
@@ -14,3 +24,4 @@ const logout = async () => {
 };
 
 document.querySelector('#logout').addEventListener('click', logout);
+

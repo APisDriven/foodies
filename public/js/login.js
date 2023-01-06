@@ -56,9 +56,11 @@ if (signupEmail.value && signupName.value && signupPw.value) {
 let login = document.getElementById("submit-button")
 
 login.addEventListener("click", function() {
+  document.location.replace('/dashboard');
 
 })
 
 document
   .querySelector('.login-form')
   .addEventListener('submit', loginFormHandler);
+

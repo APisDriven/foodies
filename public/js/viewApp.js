@@ -6,3 +6,4 @@ viewAppBtn.addEventListener("click", function(event) {
 document.location.replace('/login');
 
 event.preventDefault()});
+
