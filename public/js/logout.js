@@ -1,11 +1,3 @@
-let logoutBtn = document.getElementById("logout-btn");
-
-logoutBtn.addEventListener("click", function(event) {
-    console.log("logout btn clicked")
-// check on this code:
-document.location.replace('/login');
-
-event.preventDefault()});
 
 
 const logout = async () => {
@@ -14,7 +6,7 @@ const logout = async () => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });
-
+  
   if (response.ok) {
     // If successfully logged out, redirect to the login page
     document.location.replace('/login');
@@ -23,5 +15,15 @@ const logout = async () => {
   }
 };
 
-document.querySelector('#logout').addEventListener('click', logout);
+let logoutBtn = document.getElementById("logout-btn");
+
+logoutBtn.addEventListener("click", function(event) {
+    console.log("logout btn clicked");
+    logout();
+// check on this code:
+document.location.replace('/login');
+
+event.preventDefault()});
+
+// document.querySelector('#logout').addEventListener('click', logout);
 

@@ -1,3 +1,4 @@
+// const router = require('express').Router();
 
 
 const CaloryChart = require('../../public/js/chart');
@@ -8,9 +9,9 @@ const withAuth = require('../../utils/auth');
 router.get('/', withAuth, (req, res)=> {
 
     //access the database to get chart data
-    //res.json(chartData);
+    res.json(chartData);
 
-    // CaloryChart.create({
+    CaloryChart.create({
         
-    // })
-})
+    })
+});
