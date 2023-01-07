@@ -22,18 +22,23 @@ const loginFormHandler = async (event) => {
   }
 };
 
-// Register Selectors
-let signupName = document.getElementById("name-signup")
-let signupEmail = document.getElementById("email-signup")
-let signupPw = document.getElementById("password-signup")
+const submitFormHandler = async (event) => {
+  // Stop the browser from submitting the form so we can do so with JavaScript
+  event.preventDefault();
 
 
-// add registration inputs to DB and send user to dashboard page
-let registerBtn = document.getElementById("register-button")
+  // Register Selectors
+  const signupName = document.getElementById("name-signup");
+  const signupEmail = document.getElementById("email-signup");
+  const signupPw = document.getElementById("password-signup");
 
-registerBtn.addEventListener("click", async function(event) {
-// check on this code:
-event.preventDefault();
+
+  // add registration inputs to DB and send user to dashboard page
+  let registerBtn = document.getElementById("register-button")
+
+  registerBtn.addEventListener("click", async function(event) {
+  // check on this code:
+  event.preventDefault();
 
 if (signupEmail.value && signupName.value && signupPw.value) {
   // Send the e-mail and password to the server
@@ -50,7 +55,7 @@ if (signupEmail.value && signupName.value && signupPw.value) {
     alert('Failed to log in');
   }
 }
-})
+})};
 
 // Verify user info and send to dashboard page
 let login = document.getElementById("submit-button")

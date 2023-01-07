@@ -1,9 +1,9 @@
-let registerBtn = document.getElementById("register-button");
+// let registerBtn = document.getElementById("register-button");
 
-registerBtn.addEventListener("click", function(event) {
-    console.log("register btn clicked")
-// check on this code:
-document.location.replace('/dashboard');
+// registerBtn.addEventListener("click", function(event) {
+//     console.log("register btn clicked")
+// // check on this code:
+// document.location.replace('/dashboard');
 
-event.preventDefault()});
+// event.preventDefault()});
 

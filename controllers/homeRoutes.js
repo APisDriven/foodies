@@ -52,6 +52,15 @@ router.get('/dashboard',(req,res) => {
   // res.render('login',{root:__dirname})
 });
 
+//http://localhost:3001/DailyConsumption
+router.get('/DailyConsumption',(req,res) => {
+  session=req.session;
+  // if(session != null && session.userid){
+      res.render('DailyConsumption');
+  // }else
+  // res.render('login',{root:__dirname})
+});
+
 
 module.exports = router;
 
