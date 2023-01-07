@@ -23,5 +23,5 @@ const foodInputFormHandler = async (event) => {
   };
   
   document
-  .querySelector('.food-item-form')
+  .querySelector('#food-item-form')
   .addEventListener('save', foodInputFormHandler);
