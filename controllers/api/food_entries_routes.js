@@ -120,7 +120,7 @@ router.post('/calories_last_week', (req, res) => {
           return {
             date,
             foodEntries: [],
-            totalCalories: null
+            totalCalories: 0
           };
         }
         const foodEntries = groups[date]
