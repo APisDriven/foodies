@@ -3,25 +3,33 @@ const foodInputFormHandler = async (event) => {
     event.preventDefault();
   
     // Gather the data from the form elements on the page
-    const todayMeal = document.querySelector('#today-meal').value.trim();
-    const todayCalories = document.querySelector('#today-cal').value.trim();
+    const foodName = document.querySelector('#today-meal').value.trim();
+    const calories = document.querySelector('#today-cal').value.trim();
   
-    if (todayMeal && todayCalories) {
-      // Send the e-mail and password to the server
-      const response = await fetch('/api/foodEntries', {
+    if (foodName && calories) {
+      console.log('Sending a request to the server')
+      const formattedRequest = {
+        'name': foodName,
+        'calories': calories
+      }
+
+      const response = await fetch('/api/foodEntries/saveFoodEntry', {
         method: 'POST',
-        body: JSON.stringify({ todayMeal, todayCalories }),
+        body: JSON.stringify(formattedRequest),
         headers: { 'Content-Type': 'application/json' },
       });
+      console.log(response)
   
       if (response.ok) {
-        document.location.replace('/dashboard');
+        // document.location.replace('/dashboard');
+        alert('saved')
       } else {
         alert('Failed to save meal');
       }
+    } else {
+      window.alert('Make sure to enter your food entry and calories before saving!')
     }
   };
   
-  document
-  .querySelector('#food-item-form')
-  .addEventListener('save', foodInputFormHandler);
+  document.getElementById('save-food-entry')
+  .addEventListener('click', foodInputFormHandler);

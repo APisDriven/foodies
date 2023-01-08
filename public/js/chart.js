@@ -9,9 +9,16 @@ const dummyData = [{
     x: '2021-11-08 ',
     y: 20
 }]
+
 //API call
 const fetchAsync = async()=>{
-  return dummyData; 
+    console.log('sending request')
+  const response = await fetch('/api/foodEntries/calories_last_week', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  console.log(response)
+  return response;
 }
 
 

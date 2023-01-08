@@ -42,7 +42,7 @@ router.post('/foodEntries_by_date', (req, res) => {
     }
   */
 
-  const userId = req.body.userId
+  const userId = req.session.user_id
   const fromDate = req.body.from
   const toDate =  req.body.to
   FoodEntry.findAll({
@@ -64,37 +64,69 @@ router.post('/foodEntries_by_date', (req, res) => {
 
 
 // get all food entries for userId for past 7 days
-router.get('/foodEntries_last_week', (req, res) => {
+router.post('/calories_last_week', (req, res) => {
 
-  const date = new Date();
-  date.setDate(date.getDate() - 7)
+  const sevenDaysAgo = new Date(new Date().setDate(new Date().getDate() - 7));
  
-  const userId = req.body.userId
+  const userId = req.session.user_id
 
   FoodEntry.findAll({
     where: { 
       userId: userId,
-      date: {
-        $gt: date.toISOString
-      }
+      // date: {
+      //   $gte: sevenDaysAgo
+      // }
      }
 })
-		.then(data => res.json(data))
+		.then(data => {
+      function sum(prev, next){
+        return prev + next;
+      }
+
+      const groups = data.reduce((groups, foodEntry) => {
+        const date = foodEntry.date.toISOString().split('T')[0];
+        if (!groups[date]) {
+          groups[date] = [];
+        }
+        groups[date].push(foodEntry);
+        return groups;
+      }, {});
+      
+      // Edit: to add it in the array format instead
+      const groupArrays = Object.keys(groups).map((date) => {
+        const foodEntries = groups[date]
+        const totalCalories = foodEntries.map(e => e.calories).reduce(sum)
+        return {
+          date,
+          foodEntries: foodEntries,
+          totalCalories: totalCalories
+        };
+      });
+
+
+      
+      console.log(groupArrays);
+      res.json(data)
+    })
 		.catch(err => {
 			res.status(401).json(err);
 		});
 });
 
 // create new food entry
-router.post('/', (req, res) => {
+router.post('/saveFoodEntry', (req, res) => {
   /* req.body should look like this...
     {
       name: "hot dog",
       calories: 200.00,
-      date: '',
-      userId: 2
     }
   */
+
+    const today = new Date()
+    req.body['date'] = today;
+
+    const userId = req.session.user_id
+    req.body['userId'] = userId
 
     FoodEntry.create(req.body).then(data => res.json(data)).catch(err => {
       res.status(401).json(err)
