@@ -7,7 +7,7 @@ const waterEntriesRoutes = require('./water_entries_routes');
 //http://localhost:3001/api/users
 router.use('/users', userRoutes)
 //http://localhost:3001/api/foodEntries
-router.use('/foodEntries', foodEntriesRoutes);
+router.use('/foodEntries/', foodEntriesRoutes);
 //http://localhost:3001/api/waterEntries
 router.use('/waterEntries', waterEntriesRoutes);
 //http://localhost:3001/api/chartCalories
