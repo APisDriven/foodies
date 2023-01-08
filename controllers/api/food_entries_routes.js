@@ -79,21 +79,53 @@ router.post('/calories_last_week', (req, res) => {
      }
 })
 		.then(data => {
+      const nums = Array.from(Array(7).keys())
+    const lastSevenDates = [...nums].map((_, i) => {
+        const d = new Date()
+        d.setDate(d.getDate() - i)
+        return d
+    }).map((date) => {
+      return date.toLocaleDateString()
+    }).reverse()
+      
+
       function sum(prev, next){
         return prev + next;
       }
 
-      const groups = data.reduce((groups, foodEntry) => {
-        const date = foodEntry.date.toISOString().split('T')[0];
-        if (!groups[date]) {
-          groups[date] = [];
+      // const groups = data.reduce((groups, foodEntry) => {
+      //   let date = foodEntry.date.toLocaleDateString();
+      //   if (!groups[date]) {
+      //     groups[date] = [];
+      //   }
+      //   groups[date].push(foodEntry);
+      //   return groups;
+      // }, {});
+
+      const groups = {}
+
+      // Add the remaining dates in the last 7 days (if User didn't put in an entry)
+      lastSevenDates.map((day) => {
+        var dateHasData = data.some(e => e.date.toLocaleDateString() == day)
+        if (!dateHasData) {
+          groups[day] = []
+          return
         }
-        groups[date].push(foodEntry);
-        return groups;
-      }, {});
+
+        const dayEntries = data.filter(e => e.date.toLocaleDateString() == day)
+        groups[day] = dayEntries
+        
+      })
       
       // Edit: to add it in the array format instead
       const groupArrays = Object.keys(groups).map((date) => {
+        if (groups[date].length == 0) {
+          return {
+            date,
+            foodEntries: [],
+            totalCalories: null
+          };
+        }
         const foodEntries = groups[date]
         const totalCalories = foodEntries.map(e => e.calories).reduce(sum)
         return {
@@ -106,7 +138,7 @@ router.post('/calories_last_week', (req, res) => {
 
       
       console.log(groupArrays);
-      res.json(data)
+      res.json(groupArrays)
     })
 		.catch(err => {
 			res.status(401).json(err);
