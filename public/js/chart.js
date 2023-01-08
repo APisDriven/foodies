@@ -1,3 +1,4 @@
+
 // const foodChart = document.getElementById('foodChart');
 const dummyData = [{
     x: '2021-11-06 ',
@@ -17,17 +18,17 @@ const fetchAsync = async()=>{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });
-  console.log(response)
-  return response;
+  return response.json();
 }
 
 
-
-fetchAsync().then(data=>{
-    // console.log(keyValues)
-    // const time_labels = Object.values(keyValues.slice(1).map(element => element[0])),
-    // calories = Object.values(keyValues[0]),
-    // calories_datasets = [],
+fetchAsync().then(data => {
+    var formattedData = data.map(e => {
+        return {
+            x: e.date,
+            y: e.totalCalories
+        }
+    })
 
     bg = [
         'rgba(27, 158, 119, 0.5)',
@@ -49,43 +50,13 @@ fetchAsync().then(data=>{
         'rgb(166, 118, 29)',
         'rgb(102, 102, 102)'
     ]
-// for (let i = 1; i < calories.length + 1; i++) {
-//     calories_datasets.push({
-//         label: calories[i - 1],
-//         data: Object.values(keyValues.slice(1, 7).map(element => element[i])),
-//         backgroundColor: bg[i - 1],
-//         borderColor: bc[i - 1]
-//     })
-// } 
-
-//   const config = {
-//     type: 'line',
-//     data: data,
-//     options: {}
-//   };
-
-//   const myChart = new Chart(
-//     document.getElementById('myChart'),
 
     const myNewChart = new Chart(document.getElementById('foodChart'), {
         type: 'line',
-        // data: {
-        //     datasets: calories_datasets,
-        //     labels: time_labels
-        // },
-        // data: {
-        //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        //     datasets: [{
-        //       label: '# of Votes',
-        //       data: [12, 19, 3, 5, 2, 3],
-        //       borderWidth: 1
-        //     }]
-        //   },
 
         data: {
-            datasets: [{ data: data }]
+            datasets: [{ data: formattedData }]
           },
-
         options: {
             scales: {
                 x: {
@@ -98,8 +69,9 @@ fetchAsync().then(data=>{
                     title: {
                         display: true,
                         text: 'Calories Intake'
-                    }
-                }
+                    },
+                    min: 0
+                },
             },
             plugins: {
                 title: {
@@ -109,9 +81,6 @@ fetchAsync().then(data=>{
                         size: 16
                     }
                 },
-                legend: {
-                    display: true
-                }
             }
         }
     })
