@@ -72,10 +72,7 @@ router.post('/calories_last_week', (req, res) => {
 
   FoodEntry.findAll({
     where: { 
-      userId: userId,
-      // date: {
-      //   $gte: sevenDaysAgo
-      // }
+      userId: userId
      }
 })
 		.then(data => {
@@ -160,7 +157,9 @@ router.post('/saveFoodEntry', (req, res) => {
     const userId = req.session.user_id
     req.body['userId'] = userId
 
-    FoodEntry.create(req.body).then(data => res.json(data)).catch(err => {
+    FoodEntry.create(req.body).then(data => {
+      return res.json(data)
+    }).catch(err => {
       res.status(401).json(err)
     })
 

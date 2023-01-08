@@ -72,6 +72,8 @@ fetchAsync().then(data => {
                     },
                     min: 0
                 },
+                responsive: true,
+                maintainAspectRatio: false
             },
             plugins: {
                 title: {
