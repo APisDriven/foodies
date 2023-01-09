@@ -74,6 +74,6 @@ router.post('/register', async(req, res)=>{
   }
 });
 
-append.use('/register', (req, res));
+
 
 module.exports = router;
