@@ -55,9 +55,15 @@ fetchAsync().then(data => {
         type: 'line',
 
         data: {
-            datasets: [{ data: formattedData }]
+            datasets: [{
+                label: 'Intake',
+                 data: formattedData,
+                 borderColor: '#00b894'
+            }]
           },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 x: {
                     title: {
@@ -68,17 +74,15 @@ fetchAsync().then(data => {
                 y: {
                     title: {
                         display: true,
-                        text: 'Calories Intake'
+                        text: 'Calories'
                     },
                     min: 0
                 },
-                responsive: true,
-                maintainAspectRatio: false
             },
             plugins: {
                 title: {
                     display: true,
-                    text: "Calories",
+                    text: "Food",
                     font: {
                         size: 16
                     }
