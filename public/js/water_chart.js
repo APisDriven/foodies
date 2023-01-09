@@ -1,88 +1,63 @@
-// const foodChart = document.getElementById('foodChart');
-
-const fetchAsync = async()=>{
-    const response = await fetch("user_data.json"),
-        keyValues = await response.json()
-    return keyValues
-}
-
-fetchAsync().then(keyValues=>{
-    console.log(keyValues)
-    const time_labels = Object.values(keyValues.slice(1).map(element => element[0])),
-    ounces = Object.values(keyValues[0]),
-    ounces_datasets = [],
-
-    bg = [
-        'rgba(27, 158, 119, 0.5)',
-        'rgba(217, 95, 2, 0.5)',
-        'rgba(117, 112, 179, 0.5)',
-        'rgba(231, 41, 138, 0.5)',
-        'rgba(102, 166, 30, 0.5)',
-        'rgba(230, 171, 2, 0.5)',
-        'rgba(166, 118, 29, 0.5)',
-        'rgba(102, 102, 102, 0.5)'
+//SETUP BLOCK
+const dataBlock = {
+datasets: [{
+    label: 'Calories',
+    data: [
+        { x: '2023-01-08', y:'100' },
+        { x: '2023-01-09', y:'200' },
+        { x: '2023-01-10', y:'300' },
+        { x: '2023-01-11', y:'400' },
+        { x: '2023-01-12', y:'500' },
+        { x: '2023-01-13', y:'600' },
+        { x: '2023-01-14', y:'700' }
     ],
-    bc = [
-        'rgb(27, 158, 119)',
-        'rgb(217, 95, 2)',
-        'rgb(117, 112, 179)',
-        'rgb(231, 41, 138)',
-        'rgb(102, 166, 30)',
-        'rgb(230, 171, 2)',
-        'rgb(166, 118, 29)',
-        'rgb(102, 102, 102)'
-    ]
-for (let i = 1; i < calories.length + 1; i++) {
-    ounces_datasets.push({
-        label: calories[i - 1],
-        data: Object.values(keyValues.slice(1, 7).map(element => element[i])),
-        backgroundColor: bg[i - 1],
-        borderColor: bc[i - 1]
-    })
-} 
+    backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+    ],
+    borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ],
+    borderWidth: 1
+}]
+};
 
-//   const config = {
-//     type: 'line',
-//     data: data,
-//     options: {}
-//   };
+//CONFIG BLOCK
+const config = {
+type: 'line',
+    data,
+    options: {
+        scales: {
+            x: {
+              type: 'time',
+              time: {
+                unit: 'day'
+              }
 
-//   const myChart = new Chart(
-//     document.getElementById('myChart'),
-    const myNewChart = new Chart(document.getElementById('myChart'), {
-        type: 'line',
-        data: {
-            datasets: ounces_datasets,
-            labels: time_labels
-        },
-        options: {
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Date'
-                    },
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Water Intake'
-                    }
-                }
             },
-            plugins: {
-                title: {
-                    display: true,
-                    text: "Water",
-                    font: {
-                        size: 16
-                    }
-                },
-                legend: {
-                    display: true
-                }
+            y: {
+                beginAtZero: true
             }
         }
-    })
+    }
+};
+
+// RENDER / INIT BLOCK
+
+const foodChart = new Chart(
+    document.getElementById('foodChart'),
+    config  
+);
+const chart = document.getElementById('foodChart').getContext('2d');
+const myChart = new Chart(chart, {
+    
 });
- 
