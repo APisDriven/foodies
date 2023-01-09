@@ -54,7 +54,7 @@ const submitFormHandler = async (event) => {
     if (response.ok) {
 
       // TODO send to dashboard automatically
-      // document.location.replace('/dashboard');
+      document.location.replace('/dashboard');
 
       // TODO delete this next line
       alert('Account registered')

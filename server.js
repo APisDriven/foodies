@@ -4,14 +4,14 @@ const session = require('express-session');
 const handlebars = require('express-handlebars');
 const dayjs = require('dayjs');
 const routes = require('./controllers');
-const helpers = require('./utils/helpers');
+// const helpers = require('./utils/helpers');
 
 const app = express();
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 
-const hbs = handlebars.create({ helpers });
+const hbs = handlebars.create();
 
 const PORT = process.env.PORT || 3001;
 
