@@ -5,6 +5,7 @@ const handlebars = require('express-handlebars');
 const dayjs = require('dayjs');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
+
 const app = express();
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -24,8 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use(cookieParser());
 
-app.use(routes);
-
 // Configure and link a session object with the sequelize store
 //TODO create a real secret key
 const oneDay = 1000 * 60 * 60 * 24;
@@ -41,6 +40,10 @@ const sess = {
 
 // Add express-session and store as Express.js middleware
 app.use(session(sess));
+app.use(routes);
+
+
+
 
 
 sequelize.sync({ force: false }).then(() => {

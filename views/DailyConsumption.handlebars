@@ -22,8 +22,8 @@
           <form>
             <input type="text" id="today-meal" placeholder="Enter meal"/><br>
             <input type="text" id="today-cal" placeholder="Enter calories"/>
-            <button class="btn" id="save">Save</button>
-            <button class="btn" id="delete">Delete</button>
+            <button class="btn btn-primary" id="save-food-entry">Save</button>
+            <button class="btn btn-primary" id="delete">Delete</button>
           </form>
         </div>
 
@@ -56,15 +56,16 @@
       </ul>
     </div> --}}
   </main>
-  <a href="#"><button class="btn" id="visit-dashboard">Visit Dashboard</button></a>
+  <a href="#"><button class="btn btn-primary" id="visit-dashboard">Visit Dashboard</button></a>
 
   
   <footer>
-    <button id="logout-btn">Logout</button>
+    <button class="btn btn-primary" id="logout-btn">Logout</button>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
   <script src="/js/dashboard.js"></script>
   <script src="/js/logout.js"></script>
   <script src="/js/date.js"></script>
+  <script src="/js/inputSave.js"></script>
 </body>
 </html>

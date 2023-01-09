@@ -6,9 +6,13 @@ const sequelize = require('../config/connection');
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
+  console.log('\n----- DATABASE SYNCED -----\n');
   await seedUsers();
-  await seedWaterEntries();
+  console.log('\n----- USERS SEEDED -----\n');
+
   await seedFoodEntries();
+  console.log('\n----- FOOD ENTRIES SEEDED -----\n');
+
   process.exit(0);
 };
 
