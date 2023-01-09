@@ -20,4 +20,5 @@ Chart.js
 
 <a name = "screenshots"></a>
 ## Screenshots
-
+![Screenshot](./Assets/images/Dashboard.jpeg)
+![Screenshot](./Assets/images/Screen%20Shot%202023-01-09%20at%201.52.22%20PM.png)
