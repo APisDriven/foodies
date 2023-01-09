@@ -3,6 +3,7 @@ const { User } = require("../../models");
 const bcrypt = require("bcrypt");
 // const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const { append } = require("express/lib/response");
 
 //http://localhost:3001/api/users/login
 router.post('/login', async (req, res) => {
@@ -48,18 +49,18 @@ router.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
-// Router for Registration
-router.post("/register", async (req, res, next) => {
-  //res.status(201).json(req.body);
-  //add new user and return 201
-  const salt = await bcrypt.genSalt(10);
-  var usr = {
-    first_name: req.body.firstName,
-    last_name: req.body.lastName,
-    email: req.body.email,
-    password: await bcrypt.hash(req.body.password, salt),
-  }
-})
+// // Router for Registration
+// router.post("/register", async (req, res, next) => {
+//   //res.status(201).json(req.body);
+//   //add new user and return 201
+//   const salt = await bcrypt.genSalt(10);
+//   var usr = {
+//     first_name: req.body.firstName,
+//     last_name: req.body.lastName,
+//     email: req.body.email,
+//     password: await bcrypt.hash(req.body.password, salt),
+//   }
+// })
 
 //http://localhost:3001/api/users/logout
 router.post('/logout', (req, res) => {
@@ -82,5 +83,7 @@ router.post('/register', async(req, res, next)=>{
   created_user = await User.create(user);
   res.status(201).json(created_user);
 });
+
+append.use('/register', (req, res));
 
 module.exports = router;
