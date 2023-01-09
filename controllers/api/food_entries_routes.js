@@ -42,7 +42,7 @@ router.post('/foodEntries_by_date', (req, res) => {
     }
   */
 
-  const userId = req.body.userId
+  const userId = req.session.user_id
   const fromDate = req.body.from
   const toDate =  req.body.to
   FoodEntry.findAll({
@@ -64,39 +64,102 @@ router.post('/foodEntries_by_date', (req, res) => {
 
 
 // get all food entries for userId for past 7 days
-router.get('/foodEntries_last_week', (req, res) => {
+router.post('/calories_last_week', (req, res) => {
 
-  const date = new Date();
-  date.setDate(date.getDate() - 7)
+  const sevenDaysAgo = new Date(new Date().setDate(new Date().getDate() - 7));
  
-  const userId = req.body.userId
+  const userId = req.session.user_id
 
   FoodEntry.findAll({
     where: { 
-      userId: userId,
-      date: {
-        $gt: date.toISOString
-      }
+      userId: userId
      }
 })
-		.then(data => res.json(data))
+		.then(data => {
+      const nums = Array.from(Array(7).keys())
+    const lastSevenDates = [...nums].map((_, i) => {
+        const d = new Date()
+        d.setDate(d.getDate() - i)
+        return d
+    }).map((date) => {
+      return date.toLocaleDateString()
+    }).reverse()
+      
+
+      function sum(prev, next){
+        return prev + next;
+      }
+
+      // const groups = data.reduce((groups, foodEntry) => {
+      //   let date = foodEntry.date.toLocaleDateString();
+      //   if (!groups[date]) {
+      //     groups[date] = [];
+      //   }
+      //   groups[date].push(foodEntry);
+      //   return groups;
+      // }, {});
+
+      const groups = {}
+
+      // Add the remaining dates in the last 7 days (if User didn't put in an entry)
+      lastSevenDates.map((day) => {
+        var dateHasData = data.some(e => e.date.toLocaleDateString() == day)
+        if (!dateHasData) {
+          groups[day] = []
+          return
+        }
+
+        const dayEntries = data.filter(e => e.date.toLocaleDateString() == day)
+        groups[day] = dayEntries
+        
+      })
+      
+      // Edit: to add it in the array format instead
+      const groupArrays = Object.keys(groups).map((date) => {
+        if (groups[date].length == 0) {
+          return {
+            date,
+            foodEntries: [],
+            totalCalories: 0
+          };
+        }
+        const foodEntries = groups[date]
+        const totalCalories = foodEntries.map(e => e.calories).reduce(sum)
+        return {
+          date,
+          foodEntries: foodEntries,
+          totalCalories: totalCalories
+        };
+      });
+
+
+      
+      console.log(groupArrays);
+      res.json(groupArrays)
+    })
 		.catch(err => {
 			res.status(401).json(err);
 		});
 });
 
 // create new food entry
-router.post('/', (req, res) => {
+router.post('/saveFoodEntry', (req, res) => {
   /* req.body should look like this...
     {
       name: "hot dog",
       calories: 200.00,
-      date: '',
-      userId: 2
     }
   */
 
-    FoodEntry.create(req.body).then(data => res.json(data)).catch(err => {
+    const today = new Date()
+    req.body['date'] = today;
+
+    const userId = req.session.user_id
+    req.body['userId'] = userId
+
+    FoodEntry.create(req.body).then(data => {
+      return res.json(data)
+    }).catch(err => {
       res.status(401).json(err)
     })
 
