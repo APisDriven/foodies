@@ -44,22 +44,6 @@ router.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
-<<<<<<< HEAD
-// // Router for Registration
-// router.post("/register", async (req, res, next) => {
-//   //res.status(201).json(req.body);
-//   //add new user and return 201
-//   const salt = await bcrypt.genSalt(10);
-//   var usr = {
-//     first_name: req.body.firstName,
-//     last_name: req.body.lastName,
-//     email: req.body.email,
-//     password: await bcrypt.hash(req.body.password, salt),
-//   }
-// })
-
-=======
->>>>>>> eefa6622982e78088436ec649809ab95e63793d2
 //http://localhost:3001/api/users/logout
 // router.post('/logout', (req, res) => {
 //     if (req.session.logged_in) {
@@ -90,6 +74,6 @@ router.post('/register', async(req, res)=>{
   }
 });
 
-append.use('/register', (req, res));
+
 
 module.exports = router;
