@@ -3,6 +3,7 @@ const { User } = require("../../models");
 const bcrypt = require("bcrypt");
 // const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const { append } = require("express/lib/response");
 
 //http://localhost:3001/api/users/login
 router.post('/login', async (req, res) => {
@@ -72,5 +73,7 @@ router.post('/register', async(req, res)=>{
     res.status(400).json(err);
   }
 });
+
+append.use('/register', (req, res));
 
 module.exports = router;
