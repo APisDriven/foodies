@@ -9,11 +9,11 @@
 
 <a name = "description"></a>
 ## Description
-An application that helps users track their food intake and water intake. The app is built by using the MVC paragdim, has it's own server-side API, user authentication, and connects to a database. The app will also give the user a chart that displays calories over days. Giving the user a quick view of their intake.
+Foodies is a dietary tracking application that allows users to log, track and view their calorie consumption over time. The app is built by using the MVC paragdim, has it's own server-side API, user authentication, and  database. Users are also given a a line graph to display calories over days.
 
 <a name = "technologies"></a>
 ## Technologies
-Chart.js
+Chart.js, Node, js, Handlebars, Sequelize, mSQL, day.js
 
 <a name = "link"></a>
 ## Links
@@ -22,8 +22,16 @@ Github: [GitHub Pages](https://github.com/APisDriven/foodies)
 
 <a name = "screenshots"></a>
 ## Screenshots
+Wireframe:
+
+![Screenshot](/Assets/images/Password.jpeg)
 ![Screenshot](/Assets/images/Dashboard.jpeg)
-![Screenshot](./Assets/login%20.png)
+![Screenshot](/Assets/images/Daily%20Consumption.jpeg)
+
+End Product:
+
+![Screenshot](/Assets/images/login%20.png)
 ![Screenshot](./Assets/images/Screen%20Shot%202023-01-09%20at%201.52.22%20PM.png)
-![Screenshot](./Assets/daily%20consumption%20.png) 
+![Screenshot](./Assets/images/daily%20consumption%20.png)
+
 
